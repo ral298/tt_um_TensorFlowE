@@ -42,7 +42,7 @@ module four_palabras (
                     flat_comple<=1'b1;
                     var_data_comple=(dato<<(6'd56));
                     //EL 4 ES POR (2**5)/8, DATA SERIA 5 DATA=5.
-                    for (int i = 0; i < palabras_escale-2; i = i + 1) begin
+                    for (int i = 0; i < palabras_escale-1; i = i + 1) begin
                         var_data_comple=var_data_comple+(mem[i]<<(i*4'd8));
                     end
                     data_comple<=var_data_comple;
