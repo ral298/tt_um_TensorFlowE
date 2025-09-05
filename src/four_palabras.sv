@@ -18,7 +18,7 @@ module four_palabras (
         con          <= bits_escale'h0;
         data_comple  <= 64'h0;
         flat_comple  <= 1'b0;
-        for (int j = 0; j < palabras_escale-2; j++) begin
+        for (int j = 0; j < palabras_escale-1; j++) begin
             mem[j] <= 8'h0;
         end
     end
@@ -29,7 +29,7 @@ module four_palabras (
             con          <= bits_escale'h0;
             data_comple  <= 64'h0;
             flat_comple  <= 1'b0;
-            for (int j = 0; j < palabras_escale-2; j++) begin
+            for (int j = 0; j < palabras_escale-1; j++) begin
                 mem[j] <= 8'h0;
             end
         end
