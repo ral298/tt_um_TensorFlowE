@@ -54,6 +54,8 @@ module four_palabras (
                     con      <= con + bits_escale'h1;
                 end
             end
+            else
+                flat_comple <= 1'b0;
         end
     end
 
