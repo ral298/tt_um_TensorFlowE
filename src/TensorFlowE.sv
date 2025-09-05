@@ -104,13 +104,14 @@ matrix_accumulate_unit matrix_accumulate_unit_u(
 
 
 uart_tx_4in4 uart_tx_4in4_u(
-.clk(clk),
-.start,
-.next_uart(Ena_read_Ena),
-.rst(rst),
-.input_dato(dato_in_64_bits_output),
-.Output_dato(Datos_out),
-.flat_out(Ena_out)
+    .clk(clk),
+    .start,
+    .next_uart(Ena_read_Ena),
+    .rst(rst),
+    .input_dato(dato_in_64_bits_output),
+    .Output_dato(Datos_out),
+    .flat_out(Ena_out)
+);
 
 
 endmodule
