@@ -5,7 +5,7 @@ module TensorFlowE (
     output logic Ena_out
     );
 
-
+logic ena_TPU;
 logic [63:0] dato_in_64_bits_A;
 //logic [63:0] dato_in_32_bits_B;
 logic [63:0] dato_in_64_bits;
@@ -33,7 +33,7 @@ assign Ena_read_Ena=(!Ena_read_retradado_re)&Ena_read_retradado;
 initial
 begin
     conta_palabras<=1'b0;
-            //ena_TPU<=1'b0;
+            ena_TPU<=1'b0;
             dato_in_64_bits_A<=64'h0;
             Ena_write_retradado<=1'h0;
             Ena_accu_retradado<=1'h0;
@@ -48,7 +48,7 @@ end
         if (!rst)
         begin
             conta_palabras<=1'b0;
-            //ena_TPU<=1'b0;
+            ena_TPU<=1'b0;
             dato_in_64_bits_A<=64'h0;
             Ena_write_retradado<=1'h0;
             Ena_accu_retradado<=1'h0;
@@ -70,15 +70,17 @@ end
             if (!conta_palabras & flat_64_comple)
             begin
                 dato_in_64_bits_A<= dato_in_64_bits;
-                //ena_TPU<=1'b0;
+                ena_TPU<=1'b0;
                 conta_palabras<=1'b1;
             end
 
             else if (conta_palabras & flat_64_comple)
             begin
                 conta_palabras<=1'b0;
-                //ena_TPU<=1'b1;
+                ena_TPU<=1'b1;
             end
+            else if(!conta_palabras)
+                ena_TPU<=1'b0;
         end
 
     end
