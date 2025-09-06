@@ -15,16 +15,23 @@ module tt_um_example (
     input  logic       clk,      // clock
     input  logic       rst_n     // reset_n - low to reset
 );
-  assign uio_oe  = 8'b0000_0000;
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
-
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  assign uio_oe  = 8'b0001_0000;
   
+  // List all unused inputs to prevent warnings
+logic _unused = &{ena, uio_in[7:5],uio_out[7:5],uio_out[3:0], 1'b0, };
+  
+TensorFlowE core(
+    .Datos_in(ui_in),
+    .Ena_write(uio_in[0]),
+    .rts(rst_n),
+    .clk(clk),
+    .Ena_read(uio_in[1]),
+    .clear(uio_in[2]),
+    .enable_accu(uio_in[3]),
+    .Datos_out(uo_out),
+    .Ena_out(uio_in[4])
 
+);
 
 
 endmodule

@@ -1,6 +1,6 @@
 module uart_tx_4in4(
 input logic clk,start,next_uart,rst,
-input logic [64:0] input_dato,
+input logic [63:0] input_dato,
 output logic [7:0] Output_dato,
 output logic flat_out
 );
@@ -11,11 +11,11 @@ output logic flat_out
 	initial
 	begin
 		Flat<=1'b0;
-		Con<=4'h0;
-		First<=1'b0;
-		flat_out<=1'b0;
-		Output_dato<=8'h0;
-		Dato<=64'h0;
+			Con<=4'h0;
+			First<=1'b0;
+			flat_out<=1'b0;
+			Output_dato<=8'h0;
+			Dato<=64'h0;
 	end
 
 	always @(posedge clk,negedge rst)
@@ -74,6 +74,7 @@ output logic flat_out
 					//Flat_next_dato_conv<=1;
 				end
 			end
+			/*
 			else
 			begin
 				
@@ -82,6 +83,7 @@ output logic flat_out
 				
 				//Flat_next_dato_conv<=0;
 			end
+			*/
 		end
 
 	end

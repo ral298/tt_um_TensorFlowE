@@ -14,37 +14,37 @@ logic [63:0] dato_in_64_bits_resultado;
 logic [63:0] dato_in_64_bits_output;
 logic flat_64_comple;
 
-logic Ena_write_retradado,Ena_write_Ena;
+logic Ena_write_retradado;
+logic Ena_write_retradado_re;
+logic Ena_write_Ena;
 
 
 
-four_palabras four_palabras_Unit(
-    .dato(Datos_in),
-    .rx_flat(Ena_write_Ena),
-    .rst(rst),
-    .clk(clk),
 
-    .data_comple(dato_in_64_bits),
-    .flat_comple(flat_64_comple)
-);
 
 logic conta_palabras;
 logic Ena_accu_Ena;
 logic Ena_accu_retradado;
+logic Ena_accu_retradado_re;
 logic Ena_read_Ena;
 logic Ena_read_retradado;
-assign Ena_write_Ena=(!Ena_write_retradado )&Ena_write;
+logic Ena_read_retradado_re;
+assign Ena_write_Ena=(!Ena_write_retradado_re )&Ena_write_retradado;
 
-assign Ena_accu_Ena=(!Ena_accu_retradado )&enable_accu;
-assign Ena_read_Ena=(!Ena_read_retradado)&Ena_read;
+assign Ena_accu_Ena=(!Ena_accu_retradado_re )&Ena_accu_retradado;
+assign Ena_read_Ena=(!Ena_read_retradado_re)&Ena_read_retradado;
 
 initial
 begin
     conta_palabras<=1'b0;
-    ena_TPU<=1'b0;
-    dato_in_64_bits_A<=64'h0;
-    Ena_write_retradado<=1'h0;
-    Ena_accu_retradado<=1'h0;
+            //ena_TPU<=1'b0;
+            dato_in_64_bits_A<=64'h0;
+            Ena_write_retradado<=1'h0;
+            Ena_accu_retradado<=1'h0;
+            Ena_read_retradado<=1'h0;
+            Ena_write_retradado_re<=1'h0;
+            Ena_accu_retradado_re<=1'h0;
+            Ena_read_retradado_re<=1'h0;
 end
 
     always_ff @(posedge clk or negedge rst)
@@ -57,24 +57,31 @@ end
             Ena_write_retradado<=1'h0;
             Ena_accu_retradado<=1'h0;
             Ena_read_retradado<=1'h0;
+            Ena_write_retradado_re<=1'h0;
+            Ena_accu_retradado_re<=1'h0;
+            Ena_read_retradado_re<=1'h0;
+
         end
         else
         begin
 
             Ena_write_retradado<=Ena_write;
+            Ena_write_retradado_re<=Ena_write_retradado;
             Ena_accu_retradado<=enable_accu;
+            Ena_accu_retradado_re<=Ena_accu_retradado;
             Ena_read_retradado<=Ena_read_retradado;
+            Ena_read_retradado_re<=Ena_read_retradado;
             if (!conta_palabras & flat_64_comple)
             begin
                 dato_in_64_bits_A<= dato_in_64_bits;
-                ena_TPU<=1'b0;
+                //ena_TPU<=1'b0;
                 conta_palabras<=1'b1;
             end
 
             else if (conta_palabras & flat_64_comple)
             begin
                 conta_palabras<=1'b0;
-                ena_TPU<=1'b1;
+                //ena_TPU<=1'b1;
             end
         end
 
@@ -82,7 +89,15 @@ end
 
 
 
+four_palabras four_palabras_Unit(
+    .dato(Datos_in),
+    .rx_flat(Ena_write_Ena),
+    .rst(rst),
+    .clk(clk),
 
+    .data_comple(dato_in_64_bits),
+    .flat_comple(flat_64_comple)
+);
 
 matrix_multiply_unit matrix_multiply_unit_u(
     
