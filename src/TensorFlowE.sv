@@ -18,10 +18,6 @@ logic Ena_write_retradado;
 logic Ena_write_retradado_re;
 logic Ena_write_Ena;
 
-
-
-
-
 logic conta_palabras;
 logic Ena_accu_Ena;
 logic Ena_accu_retradado;
@@ -87,27 +83,15 @@ end
 
     end
 
-
-
-four_palabras four_palabras_Unit(
-    .dato(Datos_in),
-    .rx_flat(Ena_write_Ena),
-    .rst(rst),
-    .clk(clk),
-
-    .data_comple(dato_in_64_bits),
-    .flat_comple(flat_64_comple)
-);
-
-matrix_multiply_unit matrix_multiply_unit_u(
-    
+matrix_multiply_unit multiply_unit_u ( //#(.DATA_WIDTH(64), .VAR_WIDTH (8), .M_SIZE(4)) 
+    .clk(clk),.rst(rst),
     .matrixA(dato_in_64_bits_A), //|<i
     .matrixB(dato_in_64_bits), //|<i
     .result(dato_in_64_bits_resultado)   //|>o
 );
 
 
-matrix_accumulate_unit matrix_accumulate_unit_u(
+matrix_accumulate_unit  accumulate_unit_u (
 
     .clock(clk),
     .reset(rst),
@@ -127,6 +111,18 @@ uart_tx_4in4 uart_tx_4in4_u(
     .Output_dato(Datos_out),
     .flat_out(Ena_out)
 );
+
+four_palabras four_palabras_Unit(
+    .dato(Datos_in),
+    .rx_flat(Ena_write_Ena),
+    .rst(rst),
+    .clk(clk),
+
+    .data_comple(dato_in_64_bits),
+    .flat_comple(flat_64_comple)
+);
+
+
 
 
 endmodule

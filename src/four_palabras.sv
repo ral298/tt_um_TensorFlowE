@@ -21,6 +21,7 @@ module four_palabras (
         for (int j = 0; j < palabras_escale-1; j++) begin
             mem[j] <= 8'h0;
         end
+        var_data_comple=64'h0;
     end
 
     // Lógica secuencial con reset asíncrono
@@ -32,6 +33,7 @@ module four_palabras (
             for (int j = 0; j < palabras_escale-1; j++) begin
                 mem[j] <= 8'h0;
             end
+            var_data_comple=64'h0;
         end
         else begin
             if (rx_flat) begin

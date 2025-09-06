@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1757131203" />
-    <testcase name="test_project" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="9" time="0.009692668914794922" sim_time_ns="14700.001" ratio_time="1516610.2473140159" />
+    <property name="random_seed" value="1757135376" />
+    <testcase name="test_project" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="9" time="0.15182161331176758" sim_time_ns="114700.001" ratio_time="755491.9125016945" />
   </testsuite>
 </testsuites>

@@ -1,29 +1,29 @@
 [*]
-[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Mon Nov 20 16:00:28 2023
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sat Sep  6 04:19:51 2025
 [*]
-[dumpfile] "/home/uri/p/tt-new-template-proto/test/tb.vcd"
-[dumpfile_mtime] "Mon Nov 20 15:58:34 2023"
-[dumpfile_size] 1110
-[savefile] "/home/uri/p/tt-new-template-proto/test/tb.gtkw"
+[dumpfile] "/home/ral298/tt_um_TensorFlowE/test/tb.vcd"
+[dumpfile_mtime] "Sat Sep  6 04:19:00 2025"
+[dumpfile_size] 9195
+[savefile] "/home/ral298/tt_um_TensorFlowE/test/tb.gtkw"
 [timestart] 0
-[size] 1376 600
+[size] 2490 1016
 [pos] -1 -1
-*-24.534533 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-21.553812 14570000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
+[treeopen] tb.user_project.
+[treeopen] tb.user_project.core.
 [sst_width] 297
-[signals_width] 230
+[signals_width] 842
 [sst_expanded] 1
-[sst_vpaned_height] 158
+[sst_vpaned_height] 317
 @28
 tb.user_project.ena
-@29
 tb.user_project.clk
-@28
 tb.user_project.rst_n
 @200
 -Inputs
-@22
+@24
 tb.user_project.ui_in[7:0]
 @200
 -Bidirectional Pins
@@ -33,7 +33,113 @@ tb.user_project.uio_oe[7:0]
 tb.user_project.uio_out[7:0]
 @200
 -Output Pins
-@22
+@23
 tb.user_project.uo_out[7:0]
+@200
+-
+-Datos de 64 bits
+@28
+tb.user_project.core.four_palabras_Unit.con[2:0]
+@22
+tb.user_project.core.four_palabras_Unit.data_comple[63:0]
+@24
+tb.user_project.core.four_palabras_Unit.dato[7:0]
+@28
+tb.user_project.core.four_palabras_Unit.flat_comple
+@420
+tb.user_project.core.four_palabras_Unit.j
+@28
+tb.user_project.core.four_palabras_Unit.rst
+tb.user_project.core.four_palabras_Unit.rx_flat
+tb.user_project.core.four_palabras_Unit.var_data_comple[63:0]
+@200
+-
+-Enable 
+@28
+tb.user_project.core.clk
+tb.user_project.core.Ena_accu_Ena
+tb.user_project.core.Ena_read_Ena
+tb.user_project.core.Ena_write_Ena
+@200
+-
+-Datos Entrada
+@28
+tb.user_project.core.dato_in_64_bits[63:0]
+tb.user_project.core.dato_in_64_bits_A[63:0]
+@200
+-Datos del multiplicador
+@c00028
+matrix_multiply_unit_u.matrixA[63:0]
+@28
+(0)matrix_multiply_unit_u.matrixA[63:0]
+(1)matrix_multiply_unit_u.matrixA[63:0]
+(2)matrix_multiply_unit_u.matrixA[63:0]
+(3)matrix_multiply_unit_u.matrixA[63:0]
+(4)matrix_multiply_unit_u.matrixA[63:0]
+(5)matrix_multiply_unit_u.matrixA[63:0]
+(6)matrix_multiply_unit_u.matrixA[63:0]
+(7)matrix_multiply_unit_u.matrixA[63:0]
+(8)matrix_multiply_unit_u.matrixA[63:0]
+(9)matrix_multiply_unit_u.matrixA[63:0]
+(10)matrix_multiply_unit_u.matrixA[63:0]
+(11)matrix_multiply_unit_u.matrixA[63:0]
+(12)matrix_multiply_unit_u.matrixA[63:0]
+(13)matrix_multiply_unit_u.matrixA[63:0]
+(14)matrix_multiply_unit_u.matrixA[63:0]
+(15)matrix_multiply_unit_u.matrixA[63:0]
+(16)matrix_multiply_unit_u.matrixA[63:0]
+(17)matrix_multiply_unit_u.matrixA[63:0]
+(18)matrix_multiply_unit_u.matrixA[63:0]
+(19)matrix_multiply_unit_u.matrixA[63:0]
+(20)matrix_multiply_unit_u.matrixA[63:0]
+(21)matrix_multiply_unit_u.matrixA[63:0]
+(22)matrix_multiply_unit_u.matrixA[63:0]
+(23)matrix_multiply_unit_u.matrixA[63:0]
+(24)matrix_multiply_unit_u.matrixA[63:0]
+(25)matrix_multiply_unit_u.matrixA[63:0]
+(26)matrix_multiply_unit_u.matrixA[63:0]
+(27)matrix_multiply_unit_u.matrixA[63:0]
+(28)matrix_multiply_unit_u.matrixA[63:0]
+(29)matrix_multiply_unit_u.matrixA[63:0]
+(30)matrix_multiply_unit_u.matrixA[63:0]
+(31)matrix_multiply_unit_u.matrixA[63:0]
+(32)matrix_multiply_unit_u.matrixA[63:0]
+(33)matrix_multiply_unit_u.matrixA[63:0]
+(34)matrix_multiply_unit_u.matrixA[63:0]
+(35)matrix_multiply_unit_u.matrixA[63:0]
+(36)matrix_multiply_unit_u.matrixA[63:0]
+(37)matrix_multiply_unit_u.matrixA[63:0]
+(38)matrix_multiply_unit_u.matrixA[63:0]
+(39)matrix_multiply_unit_u.matrixA[63:0]
+(40)matrix_multiply_unit_u.matrixA[63:0]
+(41)matrix_multiply_unit_u.matrixA[63:0]
+(42)matrix_multiply_unit_u.matrixA[63:0]
+(43)matrix_multiply_unit_u.matrixA[63:0]
+(44)matrix_multiply_unit_u.matrixA[63:0]
+(45)matrix_multiply_unit_u.matrixA[63:0]
+(46)matrix_multiply_unit_u.matrixA[63:0]
+(47)matrix_multiply_unit_u.matrixA[63:0]
+(48)matrix_multiply_unit_u.matrixA[63:0]
+(49)matrix_multiply_unit_u.matrixA[63:0]
+(50)matrix_multiply_unit_u.matrixA[63:0]
+(51)matrix_multiply_unit_u.matrixA[63:0]
+(52)matrix_multiply_unit_u.matrixA[63:0]
+(53)matrix_multiply_unit_u.matrixA[63:0]
+(54)matrix_multiply_unit_u.matrixA[63:0]
+(55)matrix_multiply_unit_u.matrixA[63:0]
+(56)matrix_multiply_unit_u.matrixA[63:0]
+(57)matrix_multiply_unit_u.matrixA[63:0]
+(58)matrix_multiply_unit_u.matrixA[63:0]
+(59)matrix_multiply_unit_u.matrixA[63:0]
+(60)matrix_multiply_unit_u.matrixA[63:0]
+(61)matrix_multiply_unit_u.matrixA[63:0]
+(62)matrix_multiply_unit_u.matrixA[63:0]
+(63)matrix_multiply_unit_u.matrixA[63:0]
+@1401200
+-group_end
+@28
+matrix_multiply_unit_u.matrixB[63:0]
+@22
+matrix_multiply_unit_u.result[63:0]
 [pattern_trace] 1
 [pattern_trace] 0

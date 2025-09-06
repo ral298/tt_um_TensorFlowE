@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.sv four_palabras.sv matrix-mac-unit.sv mmac_pkg.sv TensorFlowE.sv uart_tx_4in4.sv
+PROJECT_SOURCES = project.sv four_palabras.sv matrix_multiply_unit.sv matrix_accumulate_unit.sv TensorFlowE.sv uart_tx_4in4.sv
 
 ifneq ($(GATES),yes)
 
