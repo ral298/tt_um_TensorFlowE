@@ -1,6 +1,6 @@
 module TensorFlowE (
     input logic [7:0]Datos_in,
-    input logic Ena_write,rts,clk,Ena_read,clear,enable_accu,
+    input logic Ena_write,rst,clk,Ena_read,clear,enable_accu,
     output logic [7:0] Datos_out,
     output logic Ena_out
     );
@@ -120,7 +120,7 @@ matrix_accumulate_unit matrix_accumulate_unit_u(
 
 uart_tx_4in4 uart_tx_4in4_u(
     .clk(clk),
-    .start,
+    .start(1'b0),
     .next_uart(Ena_read_Ena),
     .rst(rst),
     .input_dato(dato_in_64_bits_output),

@@ -18,12 +18,12 @@ module tt_um_example (
   assign uio_oe  = 8'b0001_0000;
   
   // List all unused inputs to prevent warnings
-logic _unused = &{ena, uio_in[7:5],uio_out[7:5],uio_out[3:0], 1'b0, };
+logic _unused = &{ena, uio_in[7:5],uio_out[7:5],uio_out[3:0], 1'b0 };
   
 TensorFlowE core(
     .Datos_in(ui_in),
     .Ena_write(uio_in[0]),
-    .rts(rst_n),
+    .rst(rst_n),
     .clk(clk),
     .Ena_read(uio_in[1]),
     .clear(uio_in[2]),

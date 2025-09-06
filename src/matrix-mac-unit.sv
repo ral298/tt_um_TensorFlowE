@@ -5,7 +5,7 @@
 
 
 
-import mmac_pkg::*;
+
 
 /*----------------------------MATRIX MULTIPLY STAGE-------------------------------*/
 //                                                                                //
@@ -13,7 +13,12 @@ import mmac_pkg::*;
 //                                                                                //
 /*--------------------------------------------------------------------------------*/
 
-module matrix_multiply_unit(
+module matrix_multiply_unit #( localparam DATA_WIDTH = 64, //data width of the module
+  
+ localparam VAR_WIDTH = 8,  //data width of internal variables
+ 
+ localparam M_SIZE = 4 //matrix size
+ )(
     
     input  logic [DATA_WIDTH-1:0] matrixA, //|<i
     input  logic [DATA_WIDTH-1:0] matrixB, //|<i
@@ -50,7 +55,12 @@ endmodule
 //                                                                                  //
 /*----------------------------------------------------------------------------------*/
 
-module matrix_accumulate_unit(
+module matrix_accumulate_unit #( localparam DATA_WIDTH = 64, //data width of the module
+  
+ localparam VAR_WIDTH = 8,  //data width of internal variables
+ 
+ localparam M_SIZE = 4 //matrix size
+ )(
 
     input clock,                           //|<i
     input reset,                           //|<i

@@ -15,7 +15,7 @@ module four_palabras (
 
     // Inicialización
     initial begin
-        con          <= bits_escale'h0;
+        con          <= 3'h0;
         data_comple  <= 64'h0;
         flat_comple  <= 1'b0;
         for (int j = 0; j < palabras_escale-1; j++) begin
@@ -26,7 +26,7 @@ module four_palabras (
     // Lógica secuencial con reset asíncrono
     always_ff @(posedge clk or negedge rst) begin
         if (!rst) begin
-            con          <= bits_escale'h0;
+            con          <= 3'h0;
             data_comple  <= 64'h0;
             flat_comple  <= 1'b0;
             for (int j = 0; j < palabras_escale-1; j++) begin
@@ -47,16 +47,16 @@ module four_palabras (
                     end
                     data_comple<=var_data_comple;
                     
-                    con             <= bits_escale'h0;
+                    con             <= 3'h0;
                 end
                 else begin
                     flat_comple <= 1'b0;
-                    con      <= con + bits_escale'h1;
+                    con      <= con + 3'h1;
                 end
             end
             else
                 flat_comple <= 1'b0;
         end
-    end
+   end
 
 endmodule
