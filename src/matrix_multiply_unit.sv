@@ -111,6 +111,10 @@ module matrix_multiply_unit (
                     state <= S_IDLE;
                     listo<= 1'b0;
                 end
+                default :begin
+                    state <= S_IDLE;
+                    listo<= 1'b0;
+                end
             endcase
         end
     end
