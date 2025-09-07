@@ -1,5 +1,5 @@
 
-module matrix_accumulate_unit #( localparam DATA_WIDTH = 64//, //data width of the module
+module matrix_accumulate_unit #( localparam DATA_WIDTH = 16//, //data width of the module
   
 // localparam VAR_WIDTH = 8,  //data width of internal variables
  
