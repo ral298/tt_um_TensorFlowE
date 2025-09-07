@@ -5,7 +5,7 @@
 
 package mmac_pkg; //matrix-mac-package
   
- localparam DATA_WIDTH = 64; //data width of the module
+ localparam DATA_WIDTH = 16; //data width of the module
   
  localparam VAR_WIDTH = 8;  //data width of internal variables
  
