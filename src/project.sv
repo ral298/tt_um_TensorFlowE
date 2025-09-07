@@ -15,7 +15,7 @@ module tt_um_example (
     input  logic       clk,      // clock
     input  logic       rst_n     // reset_n - low to reset
 );
-  assign uio_oe  = 8'b0011_0000;
+  assign uio_oe  = 8'b0001_0000;
   
   // List all unused inputs to prevent warnings
 logic _unused = &{ena, uio_in[7:4],uio_out[7:5],uio_out[3:0], 1'b0 };
