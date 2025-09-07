@@ -72,21 +72,21 @@ module matrix_multiply_unit (
                 S_CALC: begin
                     // Realiza una operación por ciclo de reloj
                     if (k < M_SIZE) begin
-                        accumulator <= accumulator + (A1[i][k] * B1[k][j]);
-                        k <= k + 1;
+                        accumulator <= accumulator + (A1[i[1:0]][k[1:0]] * B1[k[1:0]][j[1:0]]);
+                        k <= k + 3'h1;
                     end else begin
-                        Res1[i][j] <= accumulator[VAR_WIDTH-1:0]; // Almacena el resultado (saturando si es necesario)
+                        Res1[i[1:0]][j[1:0]] <= accumulator[VAR_WIDTH-1:0]; // Almacena el resultado (saturando si es necesario)
                         
                         // Resetea el acumulador y avanza a la siguiente posición
                         accumulator <= 8'd0;
                         k <= 3'd0;
                         
                         if (j < M_SIZE-1) begin
-                            j <= j + 1;
+                            j <= j + 3'h1;
                         end else begin
                             j <= 3'd0;
                             if (i < M_SIZE-1) begin
-                                i <= i + 1;
+                                i <= i + 3'h1;
                             end else begin
                                 i <= 3'd0;
                                 state <= S_STORE; // Pasa a la fase de almacenamiento

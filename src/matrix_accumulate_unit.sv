@@ -1,9 +1,9 @@
 
-module matrix_accumulate_unit #( localparam DATA_WIDTH = 64, //data width of the module
+module matrix_accumulate_unit #( localparam DATA_WIDTH = 64//, //data width of the module
   
- localparam VAR_WIDTH = 8,  //data width of internal variables
+// localparam VAR_WIDTH = 8,  //data width of internal variables
  
- localparam M_SIZE = 4 //matrix size
+ //localparam M_SIZE = 4 //matrix size
  )(
 
     input logic clock,                           //|<i

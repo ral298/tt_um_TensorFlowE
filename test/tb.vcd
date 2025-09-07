@@ -1,5 +1,5 @@
 $date
-	Sat Sep  6 22:28:59 2025
+	Sun Sep  7 12:38:25 2025
 $end
 $version
 	Icarus Verilog
@@ -71,7 +71,7 @@ $var wire 1 $ clk $end
 $var wire 8 N dato [7:0] $end
 $var wire 1 & rst $end
 $var wire 1 5 rx_flat $end
-$var reg 3 O con [2:0] $end
+$var reg 4 O con [3:0] $end
 $var reg 64 P data_comple [63:0] $end
 $var reg 1 9 flat_comple $end
 $var reg 64 Q var_data_comple [63:0] $end
@@ -198,7 +198,7 @@ b0 /
 0.
 bz0zzzz -
 b0 ,
-b110000 +
+b10000 +
 b0 *
 b0 )
 b0 (
@@ -208,7 +208,7 @@ b0 '
 1$
 bz0zzzz #
 b0 "
-b110000 !
+b10000 !
 $end
 #50000
 0$
