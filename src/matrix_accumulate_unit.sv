@@ -19,10 +19,10 @@ logic [DATA_WIDTH-1:0] accumulator;
 
     always_ff @(posedge clock or negedge reset) begin
         if (!reset) begin
-          accumulator <= 64'h0;
+          accumulator <= 16'h0;
         end
         else if (clear) begin
-          accumulator <= 64'h0;
+          accumulator <= 16'h0;
         end
         else begin
           accumulator <= result;
