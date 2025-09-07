@@ -4,9 +4,9 @@ module matrix_multiply_unit (
     input logic clk,
     input logic rst,
     input logic enable,
-    input  logic [63:0] matrixA, //|<i
-    input  logic [63:0] matrixB, //|<i
-    output logic [63:0] result,   //|>o
+    input  logic [15:0] matrixA, //|<i
+    input  logic [15:0] matrixB, //|<i
+    output logic [15:0] result,   //|>o
     output logic listo
 );
 
@@ -45,8 +45,8 @@ module matrix_multiply_unit (
             j <= 3'd0;
             k <= 3'd0;
             state <= S_IDLE;
-            accumulator <= 8'd0;
-            result <= 64'd0;
+            accumulator <= 4'd0;
+            result <= 16'd0;
             listo<= 1'b0;
             for(int row = 0; row < M_SIZE; row = row + 1) begin
                 for(int col = 0; col < M_SIZE; col = col + 1) begin
@@ -78,7 +78,7 @@ module matrix_multiply_unit (
                         Res1[i[1:0]][j[1:0]] <= accumulator[VAR_WIDTH-1:0]; // Almacena el resultado (saturando si es necesario)
                         
                         // Resetea el acumulador y avanza a la siguiente posición
-                        accumulator <= 8'd0;
+                        accumulator <= 4'd0;
                         k <= 3'd0;
                         
                         if (j < M_SIZE-1) begin
