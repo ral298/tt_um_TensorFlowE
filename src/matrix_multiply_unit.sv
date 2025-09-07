@@ -1,11 +1,13 @@
 
 
 module matrix_multiply_unit (
-    input clk,
-    input rst,
+    input logic clk,
+    input logic rst,
+    input logic enable,
     input  logic [63:0] matrixA, //|<i
     input  logic [63:0] matrixB, //|<i
-    output logic [63:0] result   //|>o
+    output logic [63:0] result,   //|>o
+    output logic listo
 );
 
     localparam VAR_WIDTH = 4;
@@ -45,6 +47,7 @@ module matrix_multiply_unit (
             state <= S_IDLE;
             accumulator <= 8'd0;
             result <= 64'd0;
+            listo<= 1'b0;
             for(int row = 0; row < M_SIZE; row = row + 1) begin
                 for(int col = 0; col < M_SIZE; col = col + 1) begin
                     Res1[row][col] <= 4'd0;
@@ -56,7 +59,11 @@ module matrix_multiply_unit (
                     // Espera una señal para iniciar la operación
                     // Por ejemplo, un pulso en la entrada `start`
                     // Por ahora, pasamos directamente a la carga
-                    state <= S_LOAD;
+                    if (enable)
+                    begin
+                        state <= S_LOAD;
+                    end
+                    listo<= 1'b0;
                 end
                 S_LOAD: begin
                     // Carga las matrices en los registros internos
@@ -96,11 +103,13 @@ module matrix_multiply_unit (
                         end
                     end
                     state <= S_DONE;
+                    listo<= 1'b1;
                 end
                 S_DONE: begin
                     // La operación ha finalizado
                     // Se podría pasar a S_IDLE para iniciar otra operación
                     state <= S_IDLE;
+                    listo<= 1'b0;
                 end
             endcase
         end

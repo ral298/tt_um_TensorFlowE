@@ -25,28 +25,26 @@ logic Ena_accu_retradado_re;
 logic Ena_read_Ena;
 logic Ena_read_retradado;
 logic Ena_read_retradado_re;
+
+
+
+logic Ena_clear_Ena;
+logic Ena_clear_retradado;
+logic Ena_clear_retradado_re;
+
+
+logic dato_disponible;
+logic listo;
 assign Ena_write_Ena=(!Ena_write_retradado_re )&Ena_write_retradado;
 
 assign Ena_accu_Ena=(!Ena_accu_retradado_re )&Ena_accu_retradado;
 assign Ena_read_Ena=(!Ena_read_retradado_re)&Ena_read_retradado;
 
+assign Ena_clear_Ena=(!Ena_clear_retradado_re)&Ena_clear_retradado;
+
 initial
 begin
-    conta_palabras<=1'b0;
-            ena_TPU<=1'b0;
-            dato_in_64_bits_A<=64'h0;
-            Ena_write_retradado<=1'h0;
-            Ena_accu_retradado<=1'h0;
-            Ena_read_retradado<=1'h0;
-            Ena_write_retradado_re<=1'h0;
-            Ena_accu_retradado_re<=1'h0;
-            Ena_read_retradado_re<=1'h0;
-end
-
-    always_ff @(posedge clk or negedge rst)
-    begin
-        if (!rst)
-        begin
+            dato_disponible<=1'b0;
             conta_palabras<=1'b0;
             ena_TPU<=1'b0;
             dato_in_64_bits_A<=64'h0;
@@ -56,17 +54,45 @@ end
             Ena_write_retradado_re<=1'h0;
             Ena_accu_retradado_re<=1'h0;
             Ena_read_retradado_re<=1'h0;
+            Ena_clear_retradado<=1'h0;
+            Ena_clear_retradado_re<=1'h0;
+end
+
+    always_ff @(posedge clk or negedge rst)
+    begin
+        if (!rst)
+        begin
+            dato_disponible<=1'b0;
+            conta_palabras<=1'b0;
+            ena_TPU<=1'b0;
+            dato_in_64_bits_A<=64'h0;
+            Ena_write_retradado<=1'h0;
+            Ena_accu_retradado<=1'h0;
+            Ena_read_retradado<=1'h0;
+            Ena_write_retradado_re<=1'h0;
+            Ena_accu_retradado_re<=1'h0;
+            Ena_read_retradado_re<=1'h0;
+            Ena_clear_retradado<=1'h0;
+            Ena_clear_retradado_re<=1'h0;
 
         end
         else
         begin
+            if (listo)
+                dato_disponible<=1'b1;
 
+            if (dato_disponible & Ena_read_Ena)
+                dato_disponible<=1'b0;
             Ena_write_retradado<=Ena_write;
             Ena_write_retradado_re<=Ena_write_retradado;
             Ena_accu_retradado<=enable_accu;
             Ena_accu_retradado_re<=Ena_accu_retradado;
-            Ena_read_retradado<=Ena_read_retradado;
+            Ena_read_retradado<=Ena_read;
             Ena_read_retradado_re<=Ena_read_retradado;
+
+            Ena_clear_retradado<=clear;
+            Ena_clear_retradado_re<=Ena_clear_retradado;
+
             if (!conta_palabras & flat_64_comple)
             begin
                 dato_in_64_bits_A<= dato_in_64_bits;
@@ -87,32 +113,27 @@ end
 
 matrix_multiply_unit multiply_unit_u ( //#(.DATA_WIDTH(64), .VAR_WIDTH (8), .M_SIZE(4)) 
     .clk(clk),.rst(rst),
+    .enable(ena_TPU),
     .matrixA(dato_in_64_bits_A), //|<i
     .matrixB(dato_in_64_bits), //|<i
-    .result(dato_in_64_bits_resultado)   //|>o
+    .result(dato_in_64_bits_resultado),   //|>o
+    .listo(listo)
 );
+
 
 
 matrix_accumulate_unit  accumulate_unit_u (
 
     .clock(clk),
     .reset(rst),
-    .clear(clear),
+    .clear(Ena_clear_Ena),
     .enable(Ena_accu_Ena),//ena_TPU
     .result(dato_in_64_bits_resultado),
     .out(dato_in_64_bits_output)
 ); 
 
 
-uart_tx_4in4 uart_tx_4in4_u(
-    .clk(clk),
-    .start(1'b0),
-    .next_uart(Ena_read_Ena),
-    .rst(rst),
-    .input_dato(dato_in_64_bits_output),
-    .Output_dato(Datos_out),
-    .flat_out(Ena_out)
-);
+
 
 four_palabras four_palabras_Unit(
     .dato(Datos_in),
@@ -123,7 +144,15 @@ four_palabras four_palabras_Unit(
     .data_comple(dato_in_64_bits),
     .flat_comple(flat_64_comple)
 );
-
+uart_tx_4in4 uart_tx_4in4_u(
+    .clk(clk),
+    .start(dato_disponible & Ena_read_Ena),
+    .next_uart(Ena_read_Ena),
+    .rst(rst),
+    .input_dato(dato_in_64_bits_output),
+    .Output_dato(Datos_out),
+    .flat_out(Ena_out)
+);
 
 
 

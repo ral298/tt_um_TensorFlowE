@@ -74,7 +74,7 @@ output logic flat_out
 					//Flat_next_dato_conv<=1;
 				end
 			end
-			/*
+			
 			else
 			begin
 				
@@ -83,7 +83,7 @@ output logic flat_out
 				
 				//Flat_next_dato_conv<=0;
 			end
-			*/
+			
 		end
 
 	end
