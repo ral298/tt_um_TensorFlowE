@@ -16,10 +16,13 @@ module tt_um_TensorFlowE (
     input  logic       rst_n     // reset_n - low to reset
 );
   assign uio_oe  = 8'b0001_0000;
-  
+    assign uio_out[7:5] = 3'h0;
+    assign uio_out[3:0] = 4'h0;
+    
   // List all unused inputs to prevent warnings
 logic _unused = &{ena, uio_in[7:4], 1'b0 };
   //,uio_out[7:5],uio_out[3:0]
+    
 TensorFlowE core(
     .Datos_in(ui_in),
     .Ena_write(uio_in[0]),
