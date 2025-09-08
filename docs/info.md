@@ -20,8 +20,7 @@ Inspired by Aleksandar Kostovic's Matrix-MAC Unit, we develope our own unit for 
 
 ## How to test
 
-Explain how to use your project
+Use 10 MHz clock signal, which iterates over 4-bit binary input values (i_I_cor) combined with 3-bit selection signals (select), and for each combination performs a reset cycle, applies the input value, and waits for a specific number of clock cycles (between 16 and 610 depending on the phase) to verify the circuit's behavior under different operational configurations.
 
 ## External hardware
-
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Personal Computer
