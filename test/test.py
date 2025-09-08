@@ -73,18 +73,14 @@ async def test_tensorflow_e(dut):
 
     # Matriz A predefinida
     matriz_A = [
-        [1, 2, 3, 4],   # Fila 0
-        [5, 6, 7, 8],   # Fila 1
-        [9, 10, 11, 12],# Fila 2
-        [13, 14, 15, 0] # Fila 3
+        [1, 4],   # Fila 0
+        [5, 6]
     ]
 
     # Matriz B (matriz identidad)
     matriz_B = [
-        [1, 0, 0, 0],   # Fila 0
-        [0, 1, 0, 0],   # Fila 1
-        [0, 0, 1, 0],   # Fila 2
-        [0, 0, 0, 1]    # Fila 3
+        [1, 0],   # Fila 0
+        [0, 1]    # Fila 2
     ]
 
     matriz_A_bytes = matriz_a_bytes(matriz_A)
@@ -125,7 +121,7 @@ async def test_tensorflow_e(dut):
     random.seed(42)  # Semilla para reproducibilidad
 
     def generar_matriz_aleatoria():
-        return [[random.randint(0, 15) for _ in range(4)] for _ in range(4)]
+        return [[random.randint(0, 15) for _ in range(2)] for _ in range(2)]
 
     matriz_A_rand = generar_matriz_aleatoria()
     matriz_B_rand = generar_matriz_aleatoria()
@@ -169,10 +165,8 @@ async def test_tensorflow_e(dut):
 
     # Matriz cero
     matriz_cero = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [0, 0],
+        [0, 0]
     ]
 
     matriz_cero_bytes = matriz_a_bytes(matriz_cero)
@@ -219,3 +213,4 @@ async def test_tensorflow_e(dut):
     dut._log.info(f"  - Caso 2 (Aleatorio): {hex(resultado_2)}")
     dut._log.info(f"  - Caso 3 (Cero×I): {hex(resultado_3)}")
     dut._log.info(f"  - Después de clear: {hex(valor_limpiado)}")
+
