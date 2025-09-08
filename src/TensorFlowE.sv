@@ -32,7 +32,7 @@ logic Ena_clear_Ena;
 logic Ena_clear_retradado;
 logic Ena_clear_retradado_re;
 
-
+logic flat_out_tx;
 logic dato_disponible;
 logic listo;
 assign Ena_write_Ena=(!Ena_write_retradado_re )&Ena_write_retradado;
@@ -144,15 +144,39 @@ four_palabras four_palabras_Unit(
     .data_comple(dato_in_64_bits),
     .flat_comple(flat_64_comple)
 );
-uart_tx_4in4 uart_tx_4in4_u(
+uart_tx_4in4 uart_tx_u(
     .clk(clk),
     .start(dato_disponible & Ena_read_Ena),
     .next_uart(Ena_read_Ena),
     .rst(rst),
     .input_dato(dato_in_64_bits_output),
     .Output_dato(Datos_out),
-    .flat_out(Ena_out)
+    .flat_out(flat_out_tx)
 );
+
+
+reg [2:0] estado_actual;
+
+    // Lógica para la transición de estados (Contador Síncrono)
+    always @(posedge clk or negedge rst) begin
+        if (!rst) begin
+            estado_actual <= 3'b000; // Reset a 0
+            Ena_out<=1'b0;
+        end else if (estado_actual == 3'b000) begin
+            if (flat_out_tx)begin
+                estado_actual <= 3'b001; // Reinicia a 0 después del estado 5
+                Ena_out<=1'b1;
+            end
+        end else if (estado_actual == 3'b101) begin
+            
+                estado_actual <= 3'b000; // Reinicia a 0 después del estado 5
+                Ena_out<=1'b0;
+            
+        end else begin
+            estado_actual <= estado_actual + 3'h1; // Incrementa el contador
+        end
+    end
+
 
 
 

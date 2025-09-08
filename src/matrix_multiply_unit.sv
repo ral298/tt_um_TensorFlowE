@@ -11,14 +11,14 @@ module matrix_multiply_unit (
 );
 
     localparam VAR_WIDTH = 4;
-    localparam M_SIZE = 4;
+    localparam M_SIZE = 2;
 
     logic [VAR_WIDTH-1:0] A1 [0:M_SIZE-1][0:M_SIZE-1];
     logic [VAR_WIDTH-1:0] B1 [0:M_SIZE-1][0:M_SIZE-1];
     logic [VAR_WIDTH-1:0] Res1 [0:M_SIZE-1][0:M_SIZE-1];
 
     // Contadores para iterar a través de las matrices
-    reg [2:0] i, j, k;
+    reg [1:0] i, j, k;
 
     // Acumulador para la suma de productos
     reg [7:0] accumulator; // VAR_WIDTH*2 (4*2=8) para evitar desbordamiento
@@ -31,6 +31,7 @@ module matrix_multiply_unit (
     always_comb begin
         for(int row = 0; row < M_SIZE; row = row + 1) begin
             for(int col = 0; col < M_SIZE; col = col + 1) begin
+                
                 A1[row][col] = matrixA[VAR_WIDTH*(row*M_SIZE+col) +: VAR_WIDTH];
                 B1[row][col] = matrixB[VAR_WIDTH*(row*M_SIZE+col) +: VAR_WIDTH];
                 // result[VAR_WIDTH*(row*M_SIZE+col) +: VAR_WIDTH] = Res1[row][col];
@@ -41,11 +42,11 @@ module matrix_multiply_unit (
     // MÁQUINA DE ESTADOS
     always @(posedge clk or negedge rst) begin
         if (!rst) begin
-            i <= 3'd0;
-            j <= 3'd0;
-            k <= 3'd0;
+            i <= 2'd0;
+            j <= 2'd0;
+            k <= 2'd0;
             state <= S_IDLE;
-            accumulator <= 4'd0;
+            accumulator <= 8'd0;
             result <= 16'd0;
             listo<= 1'b0;
             for(int row = 0; row < M_SIZE; row = row + 1) begin
@@ -72,23 +73,23 @@ module matrix_multiply_unit (
                 S_CALC: begin
                     // Realiza una operación por ciclo de reloj
                     if (k < M_SIZE) begin
-                        accumulator <= accumulator + (A1[i[1:0]][k[1:0]] * B1[k[1:0]][j[1:0]]);
-                        k <= k + 3'h1;
+                        accumulator <= accumulator + (A1[i[0]][k[0]] * B1[k[0]][j[0]]);
+                        k <= k + 2'h1;
                     end else begin
-                        Res1[i[1:0]][j[1:0]] <= accumulator[VAR_WIDTH-1:0]; // Almacena el resultado (saturando si es necesario)
+                        Res1[i[0]][j[0]] <= accumulator[VAR_WIDTH-1:0]; // Almacena el resultado (saturando si es necesario)
                         
                         // Resetea el acumulador y avanza a la siguiente posición
-                        accumulator <= 4'd0;
-                        k <= 3'd0;
+                        accumulator <= 8'd0;
+                        k <= 2'd0;
                         
                         if (j < M_SIZE-1) begin
-                            j <= j + 3'h1;
+                            j <= j + 2'h1;
                         end else begin
-                            j <= 3'd0;
+                            j <= 2'd0;
                             if (i < M_SIZE-1) begin
-                                i <= i + 3'h1;
+                                i <= i + 2'h1;
                             end else begin
-                                i <= 3'd0;
+                                i <= 2'd0;
                                 state <= S_STORE; // Pasa a la fase de almacenamiento
                             end
                         end
@@ -99,6 +100,8 @@ module matrix_multiply_unit (
                     // Esto se hace en un solo ciclo aquí para simplificar
                     for(int row = 0; row < M_SIZE; row = row + 1) begin
                         for(int col = 0; col < M_SIZE; col = col + 1) begin
+
+                            
                             result[VAR_WIDTH*(row*M_SIZE+col) +: VAR_WIDTH] <= Res1[row][col];
                         end
                     end

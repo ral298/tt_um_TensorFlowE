@@ -67,6 +67,7 @@ output logic flat_out
 				else
 				begin
 					Flat<=1'b0;
+					
 					Con<=2'h0;
 					flat_out<=1'b0;
 
@@ -75,6 +76,12 @@ output logic flat_out
 				end
 			end
 			
+			else if (Con==2'd2) begin
+				Flat<=1'b0;
+
+					Con<=2'h0;
+					flat_out<=1'b0;
+			end
 			else
 			begin
 				
@@ -83,6 +90,7 @@ output logic flat_out
 				
 				//Flat_next_dato_conv<=0;
 			end
+			
 			
 		end
 
