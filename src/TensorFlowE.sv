@@ -6,12 +6,12 @@ module TensorFlowE (
     );
 
 logic ena_TPU;
-logic [63:0] dato_in_64_bits_A;
+logic [15:0] dato_in_64_bits_A;
 //logic [63:0] dato_in_32_bits_B;
-logic [63:0] dato_in_64_bits;
+logic [15:0] dato_in_64_bits;
 
-logic [63:0] dato_in_64_bits_resultado;
-logic [63:0] dato_in_64_bits_output;
+logic [15:0] dato_in_64_bits_resultado;
+logic [15:0] dato_in_64_bits_output;
 logic flat_64_comple;
 
 logic Ena_write_retradado;
@@ -47,7 +47,7 @@ begin
             dato_disponible<=1'b0;
             conta_palabras<=1'b0;
             ena_TPU<=1'b0;
-            dato_in_64_bits_A<=64'h0;
+            dato_in_64_bits_A<=16'h0;
             Ena_write_retradado<=1'h0;
             Ena_accu_retradado<=1'h0;
             Ena_read_retradado<=1'h0;
@@ -65,7 +65,7 @@ end
             dato_disponible<=1'b0;
             conta_palabras<=1'b0;
             ena_TPU<=1'b0;
-            dato_in_64_bits_A<=64'h0;
+            dato_in_64_bits_A<=16'h0;
             Ena_write_retradado<=1'h0;
             Ena_accu_retradado<=1'h0;
             Ena_read_retradado<=1'h0;
