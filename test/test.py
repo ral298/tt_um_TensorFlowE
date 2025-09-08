@@ -26,15 +26,14 @@ async def test_tensorflow_e(dut):
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 5)
 
-    # Función para convertir matrices a formato de datos serial
-    def matriz_a_bytes(matriz):
-        """Convertir matriz 4x4 con elementos de 4 bits a 8 bytes"""
+    # Función para convertir matrices 2x2 a formato de datos serial
+    def matriz_2x2_a_bytes(matriz):
+        """Convertir matriz 2x2 con elementos de 4 bits a 4 bytes"""
         lista_bytes = []
         for fila in matriz:
             # Empaquetar dos elementos de 4 bits en cada byte
-            for i in range(0, 4, 2):
-                valor_byte = (fila[i] << 4) | fila[i+1]
-                lista_bytes.append(valor_byte)
+            valor_byte = (fila[0] << 4) | fila[1]
+            lista_bytes.append(valor_byte)
         return lista_bytes
 
     # Función para enviar una matriz al DUT
@@ -74,17 +73,17 @@ async def test_tensorflow_e(dut):
     # Matriz A predefinida
     matriz_A = [
         [1, 4],   # Fila 0
-        [5, 6]
+        [5, 6]    # Fila 1
     ]
 
     # Matriz B (matriz identidad)
     matriz_B = [
         [1, 0],   # Fila 0
-        [0, 1]    # Fila 2
+        [0, 1]    # Fila 1
     ]
 
-    matriz_A_bytes = matriz_a_bytes(matriz_A)
-    matriz_B_bytes = matriz_a_bytes(matriz_B)
+    matriz_A_bytes = matriz_2x2_a_bytes(matriz_A)
+    matriz_B_bytes = matriz_2x2_a_bytes(matriz_B)
 
     dut._log.info(f"Bytes de Matriz A: {[hex(x) for x in matriz_A_bytes]}")
     dut._log.info(f"Bytes de Matriz B: {[hex(x) for x in matriz_B_bytes]}")
@@ -117,7 +116,7 @@ async def test_tensorflow_e(dut):
     # =====================================================================
     dut._log.info("=== SEGUNDO CASO: Matrices aleatorias ===")
 
-    # Generar matrices aleatorias 4x4 con valores de 0 a 15 (4 bits)
+    # Generar matrices aleatorias 2x2 con valores de 0 a 15 (4 bits)
     random.seed(42)  # Semilla para reproducibilidad
 
     def generar_matriz_aleatoria():
@@ -129,8 +128,8 @@ async def test_tensorflow_e(dut):
     dut._log.info(f"Matriz A aleatoria: {matriz_A_rand}")
     dut._log.info(f"Matriz B aleatoria: {matriz_B_rand}")
 
-    matriz_A_rand_bytes = matriz_a_bytes(matriz_A_rand)
-    matriz_B_rand_bytes = matriz_a_bytes(matriz_B_rand)
+    matriz_A_rand_bytes = matriz_2x2_a_bytes(matriz_A_rand)
+    matriz_B_rand_bytes = matriz_2x2_a_bytes(matriz_B_rand)
 
     dut._log.info(f"Bytes de Matriz A aleatoria: {[hex(x) for x in matriz_A_rand_bytes]}")
     dut._log.info(f"Bytes de Matriz B aleatoria: {[hex(x) for x in matriz_B_rand_bytes]}")
@@ -169,7 +168,7 @@ async def test_tensorflow_e(dut):
         [0, 0]
     ]
 
-    matriz_cero_bytes = matriz_a_bytes(matriz_cero)
+    matriz_cero_bytes = matriz_2x2_a_bytes(matriz_cero)
 
     # Limpiar acumulador
     dut.uio_in.value = 0b00000100  # clear = 1
@@ -213,4 +212,3 @@ async def test_tensorflow_e(dut):
     dut._log.info(f"  - Caso 2 (Aleatorio): {hex(resultado_2)}")
     dut._log.info(f"  - Caso 3 (Cero×I): {hex(resultado_3)}")
     dut._log.info(f"  - Después de clear: {hex(valor_limpiado)}")
-
