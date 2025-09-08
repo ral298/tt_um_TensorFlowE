@@ -35,6 +35,8 @@ logic Ena_clear_retradado_re;
 logic flat_out_tx;
 logic dato_disponible;
 logic listo;
+logic flat_Ena_accu_Ena;
+logic flat_listo;
 assign Ena_write_Ena=(!Ena_write_retradado_re )&Ena_write_retradado;
 
 assign Ena_accu_Ena=(!Ena_accu_retradado_re )&Ena_accu_retradado;
@@ -56,6 +58,8 @@ begin
             Ena_read_retradado_re<=1'h0;
             Ena_clear_retradado<=1'h0;
             Ena_clear_retradado_re<=1'h0;
+            flat_Ena_accu_Ena<=1'h0;
+            flat_listo<=1'h0;
 end
 
     always_ff @(posedge clk or negedge rst)
@@ -74,6 +78,8 @@ end
             Ena_read_retradado_re<=1'h0;
             Ena_clear_retradado<=1'h0;
             Ena_clear_retradado_re<=1'h0;
+            flat_Ena_accu_Ena<=1'h0;
+            flat_listo<=1'h0;
 
         end
         else
@@ -92,6 +98,16 @@ end
 
             Ena_clear_retradado<=clear;
             Ena_clear_retradado_re<=Ena_clear_retradado;
+	    
+            if (Ena_accu_Ena & (!listo))
+                flat_Ena_accu_Ena<=1'h1;
+            else if ((!Ena_accu_Ena )& Ena_clear_Ena)
+                flat_Ena_accu_Ena<=1'h0;
+
+            if (listo)
+                flat_listo<=1'h1;
+            else if (Ena_clear_Ena)
+                flat_listo<=1'h0;
 
             if (!conta_palabras & flat_64_comple)
             begin
@@ -127,7 +143,7 @@ matrix_accumulate_unit  accumulate_unit_u (
     .clock(clk),
     .reset(rst),
     .clear(Ena_clear_Ena),
-    .enable(Ena_accu_Ena),//ena_TPU
+    .enable(flat_Ena_accu_Ena&flat_listo),//ena_TPU//&listo
     .result(dato_in_64_bits_resultado),
     .out(dato_in_64_bits_output)
 ); 

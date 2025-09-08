@@ -1,6 +1,9 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1757310159" />
-    <testcase name="test_tensorflow_e" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="10" time="0.007115364074707031" sim_time_ns="9800.001" ratio_time="1377301.4138287094" />
+    <property name="random_seed" value="1757354321" />
+    <testcase name="test_tensorflow_e" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="10" time="0.007765769958496094" sim_time_ns="9800.001" ratio_time="1261948.403361906" />
+    <testcase name="test_tensorflow_e2" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="200" time="0.006893157958984375" sim_time_ns="9900.001" ratio_time="1436206.8965932485" />
+    <testcase name="test_tensorflow_e3" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="358" time="0.010533332824707031" sim_time_ns="15700.000999999997" ratio_time="1490506.4960231776" />
+    <testcase name="test_tensorflow_e4" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="546" time="0.013427495956420898" sim_time_ns="19500.001000000004" ratio_time="1452244.0418740392" />
   </testsuite>
 </testsuites>

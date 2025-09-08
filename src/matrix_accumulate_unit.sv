@@ -24,13 +24,19 @@ logic [DATA_WIDTH-1:0] accumulator;
         else if (clear) begin
           accumulator <= 16'h0;
         end
-        else begin
+        else if (enable)begin
+          out<=result + accumulator ;
+        end 
+        else if (!enable)begin
+          out<=accumulator ;
           accumulator <= result;
+
         end
+
 
     end
 
 //final assignment
-assign out = enable ? result + accumulator : accumulator;
+//assign out = enable ? result + accumulator : accumulator;
 
 endmodule 
