@@ -1,9 +1,12 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1757354321" />
-    <testcase name="test_tensorflow_e" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="10" time="0.007765769958496094" sim_time_ns="9800.001" ratio_time="1261948.403361906" />
-    <testcase name="test_tensorflow_e2" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="200" time="0.006893157958984375" sim_time_ns="9900.001" ratio_time="1436206.8965932485" />
-    <testcase name="test_tensorflow_e3" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="358" time="0.010533332824707031" sim_time_ns="15700.000999999997" ratio_time="1490506.4960231776" />
-    <testcase name="test_tensorflow_e4" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="546" time="0.013427495956420898" sim_time_ns="19500.001000000004" ratio_time="1452244.0418740392" />
+    <property name="random_seed" value="1757544773" />
+    <testcase name="test_tensorflow_e" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="10" time="0.007521629333496094" sim_time_ns="9800.001" ratio_time="1302909.3252917458" />
+    <testcase name="test_tensorflow_e2" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="200" time="0.0070116519927978516" sim_time_ns="9900.001" ratio_time="1411935.5909518856" />
+    <testcase name="test_tensorflow_e3" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="358" time="0.010750770568847656" sim_time_ns="15700.000999999997" ratio_time="1460360.5294576418" />
+    <testcase name="test_tensorflow_e4" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="548" time="0.013197898864746094" sim_time_ns="19500.001000000004" ratio_time="1477507.9881910547" />
+    <testcase name="test_tensorflow_e5" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="774" time="0.02775430679321289" sim_time_ns="42500.001000000004" ratio_time="1531293.9111270853" />
+    <testcase name="test_tensorflow_e6" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="1112" time="0.030434608459472656" sim_time_ns="46300.00099999999" ratio_time="1521294.4520595365" />
+    <testcase name="test_tensorflow_e7" classname="test" file="/home/ral298/tt_um_TensorFlowE/test/test.py" lineno="1486" time="0.03277993202209473" sim_time_ns="49500.00100000002" ratio_time="1510070.2761261198" />
   </testsuite>
 </testsuites>
